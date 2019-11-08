@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="24dp"
+    android:background="#223442">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="#ffffff"
+            android:layout_gravity="center"/>
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="vertical">
+
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginLeft="10dp"
+                 android:background="#ffffff"
+                 android:text="코코로"
+                 android:textAlignment="center"/>뉴
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+
+                 <TextView
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginTop="5dp"
+                     android:layout_weight="1"
+                     android:background="#ffffff"
+                     android:text="영업시간"
+                     android:padding="5dp"
+                     android:textAlignment="center"/>
+
+                 <TextView
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginTop="5dp"
+                     android:background="#ffffff"
+                     android:layout_weight="1"
+                     android:padding="5dp"/>
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginTop="5dp"
+                     android:background="#ffffff"
+                     android:text="현재 위치에서의 거리"
+                     android:textAlignment="center"
+                     android:padding="5dp"/>
+
+                 <TextView
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginTop="5dp"
+                     android:background="#ffffff"
+                     android:layout_weight="1"
+                     android:padding="5dp"/>
+             </LinearLayout>
+
+            <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginLeft="10dp"
+                 android:layout_marginTop="5dp"
+                 android:background="#ffffff"
+                 android:text="대표 메뉴"
+                android:padding="5dp"
+                android:textAlignment="center"/>
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginLeft="10dp"
+                 android:layout_marginTop="5dp"
+                 android:background="#ffffff"/>
+
+         </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

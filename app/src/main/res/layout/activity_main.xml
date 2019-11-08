@@ -35,15 +35,16 @@
                 android:layout_margin="10dp"
                 android:src="@drawable/ic_search_24px"/>
 
-            <TextView
+            <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="search"
+                android:hint="search"
                 android:layout_gravity="center"
                 android:textSize="10pt"
                 android:layout_weight="1"/>
 
             <ImageView
+                android:id="@+id/mylocation"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="10dp"

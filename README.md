@@ -1,1 +1,2 @@
 # NearSpot
+## SmartCampus Life Project

@@ -38,7 +38,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="영업시"
+                android:text="영업시간"
                 android:textSize="20dp"/>
             <TextView
                 android:layout_width="match_parent"

@@ -1,8 +1,8 @@
 package com.example.nearspot;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class InformationActivity extends AppCompatActivity {
 

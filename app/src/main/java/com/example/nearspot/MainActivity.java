@@ -1,36 +1,44 @@
 package com.example.nearspot;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.media.Image;
-import android.os.Bundle;
-import android.os.Handler;
-import android.view.View;
-import android.widget.ImageView;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-
+    Context ctx;
     GoogleMap mMap;
     public int MY_PERMISSIONS_REQUEST = 0264;
     ImageView mylocation;
-
+//
+    LinearLayout item_store_card_1, item_store_card_2, item_store_card_3;
+    ViewPager vp;
+//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ctx = this;
 
 //        startActivity(new Intent(this, MapsActivity.class));
 
@@ -40,20 +48,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         //COARSE_LOCATION
 
         // Here, thisActivity is the current activity
-        if (ContextCompat.checkSelfPermission(MainActivity.this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
+//        if (permissionCheck != PackageManager.PERMISSION_GRANTED) { // 권한이 체크되어있지 않으면
+//
+//            ActivityCompat.requestPermissions(MainActivity.this, // 하위 호환성 측면에서 앱과 함께 사용할 특정 플랫폼 기능이 없어도 앱에 지원 라이브러리 클래스를 사용하기 위해 ActivityCompat사용
+//                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+//                    MY_PERMISSIONS_REQUEST);
+//        }
 
-            ActivityCompat.requestPermissions(MainActivity.this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST);
-        }
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
 
-        if (ContextCompat.checkSelfPermission(MainActivity.this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
@@ -64,13 +67,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             } else {
 
-                // No explanation needed, we can request the permission.
-
                 ActivityCompat.requestPermissions(MainActivity.this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST);
 
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // MY_PERMISSIONS_REQUEST is an
                 // app-defined int constant. The callback method gets the
                 // result of the request.
             }
@@ -92,7 +93,74 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 goMyLocation();
             }
         });
+//
+//        item_store_card_1 = (LinearLayout)findViewById(R.id.item_store_card);
+//        item_store_card_2 = (LinearLayout)findViewById(R.id.item_store_card);
+//        item_store_card_3 = (LinearLayout)findViewById(R.id.item_store_card);
+
+        vp = (ViewPager)findViewById(R.id.vp);
+
+        vp.setAdapter(new PagerAdapter() {
+            @Override
+            public int getCount() {
+                return 5;
+            }
+
+            @Override
+            public boolean isViewFromObject(View view, Object object) {
+                return view == ((LinearLayout) object);
+            }
+
+            @Override
+            public Object instantiateItem(ViewGroup container, int position) {
+                LayoutInflater inflater = new LayoutInflater(ctx) {
+                    @Override
+                    public LayoutInflater cloneInContext(Context newContext) {
+                        return null;
+                    }
+                };
+                View itemView = inflater.inflate(R.layout.item_store_card, container, false);
+
+                LinearLayout item_store_card = itemView.findViewById(R.id.item_store_card);
+                item_store_card.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(MainActivity.this, InformationActivity.class);
+                        startActivity(intent); //
+                    }
+                });
+//                ImageView imageView = (ImageView) itemView.findViewById(R.id.imageView);
+//                imageView.setImageResource(mResources[position]);
+
+                container.addView(itemView);
+
+                return itemView;
+            }
+
+            @Override
+            public void destroyItem(ViewGroup container, int position, Object object) {
+                container.removeView((LinearLayout) object);
+            }
+        });
+        vp.setCurrentItem(0); //앱이 실행됬을 때 첫번째 페이지로 초기화 시키는 부분
+
+        vp.setOnClickListener(movePageListener);
+        vp.setTag(0);
+        vp.setOnClickListener(movePageListener);
+        vp.setTag(1);
+        vp.setOnClickListener(movePageListener);
+        vp.setTag(2);
+  //
     }
+ //
+    public View.OnClickListener movePageListener = new View.OnClickListener(){
+        public void onClick(View v)
+        {
+
+            int tag = (int)v.getTag();
+//            vp.setCurrentItem(tag); // tag 값에 페이지에 해당하는 Position을 넣어주면 해당 페이지로 이동하는 부분
+        }
+    };
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
